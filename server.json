@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.abduljabbarbxr/reference-mcp",
+  "title": "reference-mcp",
+  "description": "Reference integrity for AI agents. Scans URLs, imports, assets, and dependencies and verifies each resolves.",
+  "version": "0.1.2",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "reference-mcp",
+      "version": "0.1.2",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
