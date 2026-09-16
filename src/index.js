@@ -6,7 +6,8 @@ import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
 import { dirname, join, resolve, extname } from "node:path";
 import { execSync } from "node:child_process";
 
-const server = new McpServer({ name: "reference-mcp", version: "0.1.0" });
+const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+const server = new McpServer({ name: pkg.name, version: pkg.version });
 
 const SKIP_DIRS = new Set(["node_modules", ".git", "dist", ".astro", ".next", ".logbook", "coverage", "build"]);
 const TEXT_EXT = new Set([".js", ".ts", ".jsx", ".tsx", ".mjs", ".cjs", ".astro", ".html", ".md", ".json", ".yml", ".yaml", ".css", ".py", ".rs", ".go", ".dart", ".vue", ".svelte", ".txt"]);
@@ -176,7 +177,7 @@ server.registerTool(
           const c = await checkLocal(root, r.value, r.file);
           findings.push({ kind: r.kind, value: r.value, file: r.file, status: c.resolved ? "ok" : "broken" });
         }
-      } else if (r.kind === "module") {
+      } else if (r.kind === "module" && checkRemote) {
         const ok = await checkNpm(r.value);
         findings.push({ kind: r.kind, value: r.value, file: r.file, status: ok === null ? "unknown" : ok ? "ok" : "broken" });
       } else if (r.kind === "url" && checkRemote) {
@@ -197,6 +198,7 @@ server.registerTool(
               checked: findings.length,
               truncated: refs.length > MAX,
               counts,
+              findings: findings.slice(0, MAX),
               broken,
               verdict: broken.length ? "BROKEN_REFERENCES" : "ALL_OK",
             },

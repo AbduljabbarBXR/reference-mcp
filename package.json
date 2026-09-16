@@ -1,6 +1,6 @@
 {
   "name": "reference-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reference integrity for AI agents. Scans a repository for URLs, imports, assets, and dependencies, then verifies each reference resolves.",
   "type": "module",
   "main": "src/index.js",
