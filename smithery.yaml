@@ -1,0 +1,12 @@
+name: reference-mcp
+description: Reference integrity for AI agents. Scans a repository for URLs, imports, assets, and dependencies, then verifies each reference resolves.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', 'reference-mcp']
+    })
