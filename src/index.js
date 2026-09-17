@@ -35,7 +35,7 @@ const LOCAL_PATH_RE = /['"]([.][^'"\s]+)['"]|href=["']([^"']+)["']|src=["']([^"'
 
 function classifyImport(value) {
   if (value.startsWith(".") || value.startsWith("/")) return { kind: "local", value };
-  if (value.startsWith("node:")) return null;
+  if (value.startsWith("node:") || value.startsWith("dart:") || value.startsWith("package:") || value.startsWith("org.") || value.startsWith("com.")) return null;
   return { kind: "module", value };
 }
 
