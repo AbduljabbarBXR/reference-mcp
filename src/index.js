@@ -55,13 +55,18 @@ function collectReferences(file) {
     }
   }
   for (const m of text.matchAll(URL_RE)) add("url", m[0].replace(/[),.;]+$/, ""));
-  for (const m of text.matchAll(IMPORT_RE)) {
-    const c = classifyImport(m[1]);
-    if (c) add(c.kind, c.value);
-  }
-  for (const m of text.matchAll(LOCAL_PATH_RE)) {
-    const v = m[1] || m[2] || m[3];
-    if (v && (v.startsWith(".") || v.startsWith("/") || /\.(png|jpg|jpeg|svg|gif|webp|pdf|css|js|woff2?|json)$/i.test(v))) add("asset", v);
+  const lines = text.split("\n");
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith("//") || trimmed.startsWith("#") || trimmed.startsWith("*") || trimmed.startsWith("/*") || trimmed.startsWith("<!--")) continue;
+    for (const m of line.matchAll(IMPORT_RE)) {
+      const c = classifyImport(m[1]);
+      if (c) add(c.kind, c.value);
+    }
+    for (const m of line.matchAll(LOCAL_PATH_RE)) {
+      const v = m[1] || m[2] || m[3];
+      if (v && (v.startsWith(".") || v.startsWith("/") || /\.(png|jpg|jpeg|svg|gif|webp|pdf|css|js|woff2?|json)$/i.test(v))) add("asset", v);
+    }
   }
   return refs;
 }
