@@ -9,7 +9,7 @@ import { execSync } from "node:child_process";
 const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
 const server = new McpServer({ name: pkg.name, version: pkg.version });
 
-const SKIP_DIRS = new Set(["node_modules", ".git", "dist", ".astro", ".next", ".logbook", "coverage", "build"]);
+const SKIP_DIRS = new Set(["node_modules", ".git", "dist", ".astro", ".next", ".logbook", "coverage", "build", ".netlify", ".dart_tool", ".pub-cache", ".gradle", ".idea", ".vscode", ".cache", "bundle", "release", "Pods"]);
 const TEXT_EXT = new Set([".js", ".ts", ".jsx", ".tsx", ".mjs", ".cjs", ".astro", ".html", ".md", ".json", ".yml", ".yaml", ".css", ".py", ".rs", ".go", ".dart", ".vue", ".svelte", ".txt"]);
 
 function walk(dir, out = [], depth = 0) {
