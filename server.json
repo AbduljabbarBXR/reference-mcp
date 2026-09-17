@@ -3,12 +3,12 @@
   "name": "io.github.AbduljabbarBXR/reference-mcp",
   "title": "reference-mcp",
   "description": "Reference integrity for AI agents. Scans and verifies links, imports, assets, deps.",
-  "version": "0.1.3",
+  "version": "0.1.6",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "reference-mcp",
-      "version": "0.1.3",
+      "version": "0.1.6",
       "transport": {
         "type": "stdio"
       }
